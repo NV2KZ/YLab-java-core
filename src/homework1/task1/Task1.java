@@ -1,4 +1,4 @@
-package task1;
+package homework1.task1;
 
 import java.util.Arrays;
 import java.util.Date;
