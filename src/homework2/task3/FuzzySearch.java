@@ -26,6 +26,10 @@ public class FuzzySearch {
     public static boolean fuzzySearch(String fuzzyString, String searchString) {
         assert (fuzzyString != null): "fuzzyString is null";
         assert (searchString != null): "searchString is null";
+        
+        if(fuzzyString == null || searchString == null) {
+            return false;
+        }
 
         String filteredString = searchString.chars()
                 .mapToObj(e -> (char) e)
