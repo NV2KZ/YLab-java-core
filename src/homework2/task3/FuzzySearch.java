@@ -1,6 +1,7 @@
 package homework2.task3;
 
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FuzzySearch {
     /*
@@ -24,23 +25,25 @@ public class FuzzySearch {
     }
 
     public static boolean fuzzySearch(String fuzzyString, String searchString) {
-        assert (fuzzyString != null): "fuzzyString is null";
-        assert (searchString != null): "searchString is null";
-        
-        if(fuzzyString == null || searchString == null) {
+
+        if (fuzzyString == null || searchString == null) {
             return false;
         }
 
-        String filteredString = searchString.chars()
-                .mapToObj(e -> (char) e)
-                .map(Object::toString)
-                .filter(c -> filterNotInputCharacters(fuzzyString, c))
-                .collect(Collectors.joining());
+        List<Character> listOfCharsFuzzyString = new ArrayList<>();
+        List<Character> listOfCharsSearchString = new ArrayList<>();
 
-        return fuzzyString.equals(filteredString);
-    }
+        for (char c : fuzzyString.toCharArray()) {
+            listOfCharsFuzzyString.add(c);
+        }
 
-    private static boolean filterNotInputCharacters(String fuzzyString, String character) {
-        return fuzzyString.contains(character);
+        for (char c : searchString.toCharArray()) {
+            listOfCharsSearchString.add(c);
+        }
+
+        listOfCharsSearchString.retainAll(listOfCharsFuzzyString);
+
+        return listOfCharsFuzzyString.equals(listOfCharsSearchString);
     }
 }
+
