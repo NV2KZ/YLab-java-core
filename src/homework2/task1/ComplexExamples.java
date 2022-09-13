@@ -82,14 +82,21 @@ public class ComplexExamples {
 
 
     }
+
     public static void filteredAndGroupedData(Person[] data) {
+        if (data == null) {
+            System.out.println("Input array is null");
+            return;
+        }
         Map<String, Long> groupingNamed = Arrays.stream(data)
                 .distinct()
+                .filter(Objects::nonNull)
                 .collect(Collectors.groupingBy(Person::getName, Collectors.counting()));
 
-        for (Map.Entry<String, Long> entry : groupingNamed.entrySet()) {
-            System.out.println("Key:" + entry.getKey() + "\n" + "Value:" + entry.getValue());
-        }
+        groupingNamed.forEach((name, count) -> {
+            System.out.println("Key:" + name + "\n" + "Value:" + count);
+                }
+        );
     }
 }
 
