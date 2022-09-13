@@ -1,7 +1,7 @@
 package homework2.task2;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ResultPair {
     /*
@@ -11,21 +11,24 @@ public class ResultPair {
     */
     public static void main(String[] args) {
         int[] array = {3, 4, 2, 7};
-        int number = 10;
-        System.out.println(resultPair(array, number));
+        int sum = 10;
+        resultPair(array, sum);
     }
 
-    public static String resultPair(int[] array, int number) {
-        List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < array.length; i++) {
-            for (int j = i + 1; j < array.length; j++) {
-                if (array[i] + array[j] == number) {
-                    result.add(array[i]);
-                    result.add(array[j]);
-                    return result.toString();
-                }
-            }
+    public static void resultPair(int[] array, int sum) {
+        if (array == null) {
+            System.out.println("Input array is null");
+            return;
         }
-        return "Elements not found";
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < array.length; i++) {
+            if (map.containsKey(sum - array[i])) {
+                System.out.printf("[%d, %d]", array[map.get(sum - array[i])], array[i]);
+                return;
+            }
+            map.put(array[i], i);
+        }
+        System.out.println("Pair not found");
     }
 }
